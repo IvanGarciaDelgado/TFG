@@ -64,8 +64,8 @@
                 <td><img th:src="${producto.imagen}" alt="imagen"></td>
                 <td><h5 th:text="${producto.nombre}">Nombre del producto</h5></td>
                 <td><h5 th:text="${#numbers.formatCurrency(producto.precio)}">Precio del producto</h5></td>
-                <td><input class="w-25 pl-1" value="1" type="number"></td>
-                <td><h5 th:text="${#numbers.formatCurrency(producto.precio)}">Precio total</h5></td>
+                <td><input class="w-25 pl-1" value="1" type="number" onchange="actualizarPrecioTotal(this)"></td>
+                <td><h5 th:text="${#numbers.formatCurrency(producto.precio)}" id="precio-total">Precio total</h5></td>
             </tr>
             </tbody>
         </table>
@@ -114,7 +114,7 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
-
+<script th:src="@{/js/carrito.js}"></script>
 
 </body>
 </html>
