@@ -1,0 +1,115 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-3 fixed-top">
+  <div class="container">
+      <img src="assets/img/logo.png" alt="">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+
+              <li class="nav-item">
+                  <a class="nav-link" href="http://localhost:9000/">Inicio</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="http://localhost:9000/catalogo">Tienda</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="http://localhost:9000/dieta">Nutrición</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="http://localhost:9000/proveedores">Proveedores</a>
+              </li>
+              <li class="nav-item">
+                <a routerLink="usuarios" routerLinkActive="" class="nav-link">Lista de usuarios</a>
+              </li>
+              <li class="nav-item">
+                <a routerLink="registrar-usuario" routerLinkActive="" class="nav-link">Añadir usuario</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="http://localhost:9000/carrito/miscompras">Mis compras</a>
+            </li>
+              <li sec:authorize="isAuthenticated()">
+                  <a class="nav-link" href="http://localhost:9000/logout">Cerrar sesión</a>
+              </li>
+              <li class="nav-item">
+                  <a><i class="bi bi-search"></i></a>
+                  <a href="http://localhost:9000/carrito"><i class="bi bi-cart3"></i></a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</nav>
+
+<h1 id="titulo" class="text-center">{{title}}</h1>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+<footer class="mt-5 py-5" th:fragment="footer">
+  <div class="row container mx-auto pt-5">
+      <div class="footer-one col-lg-3 col-md-6 col-12">
+          <img src="assets/img/logoFooter.png" alt="logoFooter">
+          <p class="pt-3">Descubre una amplia selección de productos fitness de calidad en nuestra tienda online. Encuentra todo lo
+              que necesitas para alcanzar tus metas de acondicionamiento físico y mantener un estilo de vida saludable.
+              Desde equipamiento de entrenamiento hasta suplementos nutricionales, estamos aquí para apoyarte en tu viaje
+              fitness. ¡Explora nuestra tienda y comienza a construir un cuerpo fuerte y saludable hoy mismo!</p>
+      </div>
+      <div class="footer-one col-lg-3 col-md-6 col-12">
+          <h5 class="pb-2">Featured</h5>
+          <ul class="text-uppercase list-unstyled">
+              <li><a href="#">Proteínas</a></li>
+              <li><a href="#">Equipamiento</a></li>
+              <li><a href="#">Suplementos</a></li>
+              <li><a href="#">Entrenamiento</a></li>
+              <li><a href="#">Nutrición</a></li>
+              <li><a href="#">Rutinas</a></li>
+              <li><a href="#">Accesorios</a></li>
+          </ul>
+      </div>
+
+      <div class="footer-one col-lg-3 col-md-6 col-12">
+          <h5 class="pb-2">Contact Us</h5>
+          <div>
+              <h6 class="text-uppercase">Dirección</h6>
+              <p>28 CALLE FUENTE CARRANTONA, MADRID, ES</p>
+          </div>
+          <div>
+              <h6 class="text-uppercase">Teléfono</h6>
+              <p>(123) 456-7890</p>
+          </div>
+          <div>
+              <h6 class="text-uppercase">Email</h6>
+              <p>GOFIT@GMAIL.COM</p>
+          </div>
+      </div>
+
+      <div class="footer-one col-lg-3 col-md-6 col-12">
+          <h5 class="pb-2">Instagram</h5>
+          <div class="row">
+              <img class="img-fluid w-25 h-100 m-2" src="assets/img/footer1.jpg" alt="">
+              <img class="img-fluid w-25 h-100 m-2" src="assets/img/footer1.jpg" alt="">
+              <img class="img-fluid w-25 h-100 m-2" src="assets/img/footer1.jpg" alt="">
+              <img class="img-fluid w-25 h-100 m-2" src="assets/img/footer1.jpg" alt="">
+              <img class="img-fluid w-25 h-100 m-2" src="assets/img/footer1.jpg" alt="">
+          </div>
+      </div>
+  </div>
+
+  <div class="copyright mt-5">
+      <div class="row container mx-autp">
+
+          <div class="col-lg-3 col-md-6 col-12">
+              <img src="assets/img/pagos2.png" alt="">
+          </div>
+          <div id="copy" class="col-lg-4 col-md-6 col-12 text-nowrap">
+              <p>rymo eCommerce © 2021. All Rights Reserved</p>
+          </div>
+          <div class="col-lg-4 col-md-6 col-12">
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-twitter"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+          </div>
+      </div>
+  </div>
+</footer>

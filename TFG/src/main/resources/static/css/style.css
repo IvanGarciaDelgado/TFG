@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+body {
+    font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
+    background: #EFEFEF;
+    background: linear-gradient(to right, #e7e7e7, #fffefe);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* ============NAVBAR============ */
+
+.navbar {
+    font-size: 16px;
+    top: 0;
+    left: 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-light .navbar-nav .nav-link {
+    padding: 0 20px;
+    color: black;
+    transition: 0.3s ease;
+}
+
+.navbar-light .navbar-nav i {
+    color: black;
+    transition: 0.3s ease;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link.active {
+    color: #c5bfbf;
+}
+
+.navbar i {
+    font-size: 1.2rem;
+    padding: 0 7px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.navbar i:hover,
+.navbar i:active {
+    color: #c5bfbf;
+}
+
+/* ============SLIDER IMG============ */
+
+
+/*.slide img {*/
+/*    height: 95vh;*/
+/*}*/
+
+
+/* ============MEDIA QUERIES============ */
+
+@media (max-width: 768px) {
+    #section-1 {
+        width: 90% !important;
+    }
+
+    .servicio-fila {
+        width: 100% !important;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .icono-wrap {
+        flex-wrap: wrap;
+        justify-content: center !important;
+    }
+}
+
+/* ============SECCION MAPA============ */
+
+.mapa {
+    background: url(../img/mapa.png);
+    width: 100%;
+    height: 500px;
+}
+
+#local {
+    padding-bottom: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper {
+    width: 50%;
+    margin-left: 100px;
+    padding-top: 150px;
+}
+
+/* ============SECCION MORATALAZ============ */
+
+#numeros-local div {
+    padding: 0 20px 0 0;
+    height: 48px;
+}
+
+#numeros-local div:not(:last-child) {
+    border-right: 2px solid #3f3f3f;
+}
+
+#numeros-local div:not(:first-child) {
+    padding-left: 20px;
+}
+
+#numeros-local p {
+    margin: 0;
+}
+
+/* ============SECCION CONTACTO============ */
+
+#contenedor-formulario {
+    border: #c5c3c3 5px outset;
+}
+
+textarea {
+    resize: none;
+}
+
+
+/* ============SECCION FOOTER============ */
+
+footer {
+    background-color: #222222;
+}
+
+footer h5{
+    color: #D8D8D8;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+footer h6 {
+    color: #D8D8D8;
+}
+
+footer li {
+    padding-bottom: 4px;
+}
+
+footer li a {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+footer li a:hover {
+    color: #D8D8D8;
+}
+
+footer p {
+    color: #999;
+    font-size: 0.8rem;
+}
+
+footer .copyright a {
+    color: #000;
+    width: 38px;
+    height: 38px;
+    background-color: #fff;
+    display: inline-block;
+    text-align: center;
+    line-height: 38px;
+    border-radius: 50%;
+    transition: 0.3 ease;
+    margin: 0 5px;
+}
+
+footer .copyright img {
+    margin-left: 120px;
+}
+
+#copy {
+    margin-left: 105px;
+}

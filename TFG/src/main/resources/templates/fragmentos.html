@@ -1,0 +1,149 @@
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<!-- Fragmento #1. Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-3 fixed-top" th:fragment="navbar">
+    <div class="container">
+        <img src="/img/logo.png" alt="">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/catalogo}">Tienda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/dieta}">Nutrición</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/proveedores}">Proveedores</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLink="usuarios" routerLinkActive="" class="nav-link" href="http://localhost:4200/usuarios" sec:authorize="hasRole('ADMIN')">Lista de usuarios</a>
+                </li>
+                <li class="nav-item" >
+                    <a routerLink="registrar-usuario" routerLinkActive="" class="nav-link" href="http://localhost:4200/registrar-usuario" sec:authorize="hasRole('ADMIN')">Añadir usuario</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/carrito/miscompras}">Mis compras</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:href="@{/logout}">Cerrar sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a><i class="bi bi-search"></i></a>
+                    <a th:href="@{/carrito}"><i class="bi bi-cart3"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Fragmento #2. Catálogo de productos -->
+<div class="col-lg-3 col-md-4 mb-3" th:each="producto : ${productos}" th:fragment="catalogo-productos">
+    <div class="product-box">
+        <div class="product-inner-box position-relative">
+            <div class="icons position-absolute">
+                <a href="#" class="text-decoration-none text-dark"><i class="bi bi-suit-heart-fill"></i></a>
+                <a th:href="@{/catalogo/producto/{id}(id=${producto.id})}" class="text-decoration-none text-dark"><i class="bi bi-eye"></i></a>
+            </div>
+            <div class="onsale">
+                <span class="badge rounded-0"><i class="bi bi-arrow-down"></i><span th:text="${producto.descuento}"></span>%</span>
+            </div>
+            <img th:src="${producto.imagen}" alt="producto" class="img-fluid">
+            <div class="cart-btn">
+                <a th:href="@{/carrito/add/{id}(id=${producto.id})}" class="btn btn-white shadow-sm rounded-pill" href="#"><i class="bi bi-cart3"></i>Añadir al carrito</a>
+            </div>
+        </div>
+        <div class="product-info">
+            <div class="product-name mt-2 d-flex justify-content-center">
+                <h3 th:text="${producto.nombre}">Nombre</h3>
+            </div>
+            <div class="product-price d-flex justify-content-center">
+                <span th:text="${#numbers.formatCurrency(producto.precio)}">Precio</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Fragmento #3. Footer -->
+<footer class="mt-5 py-5" th:fragment="footer">
+    <div class="row container mx-auto pt-5">
+        <div class="footer-one col-lg-3 col-md-6 col-12">
+            <img src="/img/logoFooter.png" alt="logoFooter">
+            <p class="pt-3">Descubre una amplia selección de productos fitness de calidad en nuestra tienda online. Encuentra todo lo
+                que necesitas para alcanzar tus metas de acondicionamiento físico y mantener un estilo de vida saludable.
+                Desde equipamiento de entrenamiento hasta suplementos nutricionales, estamos aquí para apoyarte en tu viaje
+                fitness. ¡Explora nuestra tienda y comienza a construir un cuerpo fuerte y saludable hoy mismo!</p>
+        </div>
+        <div class="footer-one col-lg-3 col-md-6 col-12">
+            <h5 class="pb-2">Featured</h5>
+            <ul class="text-uppercase list-unstyled">
+                <li><a href="#">Proteínas</a></li>
+                <li><a href="#">Equipamiento</a></li>
+                <li><a href="#">Suplementos</a></li>
+                <li><a href="#">Entrenamiento</a></li>
+                <li><a href="#">Nutrición</a></li>
+                <li><a href="#">Rutinas</a></li>
+                <li><a href="#">Accesorios</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-one col-lg-3 col-md-6 col-12">
+            <h5 class="pb-2">Contact Us</h5>
+            <div>
+                <h6 class="text-uppercase">Dirección</h6>
+                <p>28 CALLE FUENTE CARRANTONA, MADRID, ES</p>
+            </div>
+            <div>
+                <h6 class="text-uppercase">Teléfono</h6>
+                <p>(123) 456-7890</p>
+            </div>
+            <div>
+                <h6 class="text-uppercase">Email</h6>
+                <p>GOFIT@GMAIL.COM</p>
+            </div>
+        </div>
+
+        <div class="footer-one col-lg-3 col-md-6 col-12">
+            <h5 class="pb-2">Instagram</h5>
+            <div class="row">
+                <img class="img-fluid w-25 h-100 m-2" src="/img/footer1.jpg" alt="">
+                <img class="img-fluid w-25 h-100 m-2" src="/img/footer1.jpg" alt="">
+                <img class="img-fluid w-25 h-100 m-2" src="/img/footer1.jpg" alt="">
+                <img class="img-fluid w-25 h-100 m-2" src="/img/footer1.jpg" alt="">
+                <img class="img-fluid w-25 h-100 m-2" src="/img/footer1.jpg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright mt-5">
+        <div class="row container mx-autp">
+
+            <div class="col-lg-3 col-md-6 col-12">
+                <img src="/img/pagos2.png" alt="">
+            </div>
+            <div id="copy" class="col-lg-4 col-md-6 col-12 text-nowrap">
+                <p>rymo eCommerce © 2021. All Rights Reserved</p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-twitter"></i></a>
+                <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/styleConfirmar.css}">
+    <script src="https://www.paypal.com/sdk/js?client-id=AeGvbF66DI_ikZLLo4Y6PnRzU1jTgxihVWntOtC5z86zmjKFYBAchPv6GaQ0pEZdc7p2bvfOKcj-xhQC&currency=EUR"></script>
+    <title>Confirmación</title>
+</head>
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav th:replace="fragmentos::navbar"></nav>
+
+<section id="blog-home" class="pt-5 mt-5 container">
+    <h2 class="font-weight-bol pt-5">Confirmar compra</h2>
+    <hr>
+</section>
+
+
+<div class="container">
+    <div id="carrito-bottom">
+        <div class="row">
+            <div class="total col-lg-6 col-md-6 col-12">
+                <div>
+                    <h5>Formas de pago</h5>
+                    <div class="d-flex justify-content-between">
+                        <h6>Paypal</h6>
+                        <p>0% comisión</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h6>Sofort</h6>
+                        <p>0% comisión</p>
+                    </div>
+                    <hr class="segundo-hr">
+                    <div class="d-flex justify-content-between">
+                        <h6>Tarjeta débito o crédito</h6>
+                        <p>3% comisión</p>
+                    </div>
+                </div>
+            </div>
+            <div id="paypal-button-container" class="d-flex justify-content-end"></div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    paypal.Buttons({
+        style:{
+            shape: 'pill',
+            label: 'pay',
+            height: 40
+        },
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: 100
+                    }
+                }]
+            });
+        },
+
+        onApprove: function(data, actions) {
+            actions.order.capture().then(function(detalles) {
+                window.location.href="/carrito/completado"
+            });
+        },
+
+        onCancel: function(data) {
+            alert("Pago cancelado")
+            console.log(data)
+        }
+    }).render('#paypal-button-container');
+</script>
+
+<!-- PIE DE PÁGINA -->
+
+<footer th:replace="fragmentos::footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+</body>
+</html>

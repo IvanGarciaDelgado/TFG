@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/styleRegistro.css}">
+</head>
+<body>
+
+    <div class="container w-75 bg-secondary mt-5 mb-5 rounded shadow">
+        <div class="row align-items-stretch">
+            <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded">
+
+            </div>
+            <div class="col bg-white p-5 rounded-end">
+                <div class="text-end">
+                    <img src="img/logo.png" alt="logo">
+                </div>
+
+                <div th:if="${param.exito}">
+                    <div class="alert alert-info mt-4">
+                        Se ha registrado exitosamente!
+                    </div>
+                </div>
+
+                <div th:if="${error}" class="error-message">
+                    <div class="alert alert-danger mt-4">
+                        El correo electrónico ya está en uso!
+                    </div>
+<!--                    <p th:text="${error}"></p>-->
+                </div>
+
+                <h2 class="fw-bold text-center pt-5 mb-5">Bienvenido, registrate!</h2>
+
+                <!--LOGIN-->
+
+            <form action="#" th:action="@{/registro}" method="post" th:object="${usuario}"> <!-- th: object nos permite establecer a que atributo del modelo estará enlazado el formulario.-->
+                <div class="mb-4">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input id="nombre" type="text" class="form-control" name="nombre" th:field="*{nombre}" required>
+                </div>
+                <div class="mb-4">
+                    <label for="apellidos" class="form-label">Apellidos</label>
+                    <input id="apellidos" type="text" class="form-control" name="apellidos" th:field="*{apellidos}" required>
+                </div>
+                <div class="mb-4">
+                    <label for="telefono" class="form-label">Teléfono móvil</label>
+                    <input id="telefono" type="tel" class="form-control" name="telefono" th:field="*{movil}" required>
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input id="email" type="email" class="form-control" name="email" th:field="*{email}" required>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input id="password" type="password" class="form-control" name="password" th:field="*{password}" pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" title="La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula." required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-dark">Registrate</button>
+                </div>
+
+                <div class="my-3">
+                    <span>¿Ya tienes cuenta? <a th:href="@{/login}">Iniciar Sesión</a></span><br>
+                </div>
+            </form>
+
+            <!--LOGIN CON REDES SOCIALES-->
+
+            <div class="container w-100 my-5">
+                <div class="row text-center">
+                    <div class="col-12">Registrate con</div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-outline-primary w-100 py-1">
+                            <div class="row align-items-center">
+                                <div class="col-2 d-none d-md-block">
+                                    <img src="./img/logoFacebook.png" width="32" alt="">
+                                </div>
+                                <div class="col-12 col-md-10 text-center">
+                                    Facebook
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-outline-danger w-100 py-1">
+                            <div class="row align-items-center">
+                                <div class="col-2 d-none d-md-block">
+                                    <img src="./img/logoGoogle.png" width="32" alt="">
+                                </div>
+                                <div class="col-12 col-md-10 text-center">
+                                    Google
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
+</body>
+</html>
