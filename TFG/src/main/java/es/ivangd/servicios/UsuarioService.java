@@ -24,54 +24,50 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Slf4j // Es una librería Java que funciona como una abstracción simple para varios frameworks de logging, para poder añadir la notación log.info
-@RequiredArgsConstructor // Genera un constructor para atributos como final no inicializados y anotados con @notNull, también sirve para el ahorro del autowired.
-@Service
+@Slf4j // Proporciona funciones de registro mediante la anotación log.info
+@RequiredArgsConstructor // Crea un constructor para los campos marcados como 'final' y anotados con '@NotNull'
+@Service // Indica que esta clase es un componente de servicio de Spring
 public class UsuarioService implements UsuarioInterfaz {
 
-    private final UsuarioRepository repositorio; // Permite inyectar unas dependencias (inyección de constructor) con otras dentro de Spring, enlazar elementos.
+    private final UsuarioRepository repositorio; // Repositorio para acceder y gestionar los datos de los usuarios
 
-    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder; // Codificador de contraseñas
 
-    private final RoleRepository roleRepository;
-
+    private final RoleRepository roleRepository; // Repositorio de roles
 
     @Override
-    public Usuario guardarUsuario(UsuarioRegistroDTO registroDTO) {
-        Role roleUser = roleRepository.findFirstByNombre("ROLE_USER");
-        Usuario usuario = new Usuario(registroDTO.getNombre(),registroDTO.getApellidos(),registroDTO.getMovil(),registroDTO.getEmail(),passwordEncoder.encode(registroDTO.getPassword()), Arrays.asList(roleUser));
-        return repositorio.save(usuario);
+    public Usuario guardarUsuario(UsuarioRegistroDTO registroDTO) { // Método para guardar un usuario
+        Role roleUser = roleRepository.findFirstByNombre("ROLE_USER"); // Obtener el rol de usuario
+        Usuario usuario = new Usuario(registroDTO.getNombre(),registroDTO.getApellidos(),registroDTO.getMovil(),registroDTO.getEmail(),passwordEncoder.encode(registroDTO.getPassword()), Arrays.asList(roleUser)); // Crear un nuevo usuario con los datos proporcionados
+        return repositorio.save(usuario); // Guardar el usuario en el repositorio
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario usuario = repositorio.findByEmail(email);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException { // Método para cargar un usuario por su nombre de usuario (en este caso, el email)
+        Usuario usuario = repositorio.findByEmail(email); // Buscar el usuario en el repositorio por su email
         if(usuario == null) {
-            throw  new UsernameNotFoundException("Usuario o password inválidos");
+            throw  new UsernameNotFoundException("Usuario o password inválidos"); // Lanzar una excepción si el usuario no se encuentra
         }
-        return new User(usuario.getEmail(),usuario.getPassword(),mapearAutoridadesRoles(usuario.getRoles()));
+        return new User(usuario.getEmail(),usuario.getPassword(),mapearAutoridadesRoles(usuario.getRoles())); // Devolver una instancia de UserDetails con los datos del usuario encontrado
     }
 
-    private Collection<? extends GrantedAuthority> mapearAutoridadesRoles(Collection<Role> roles) {
+    private Collection<? extends GrantedAuthority> mapearAutoridadesRoles(Collection<Role> roles) { // Método para mapear los roles del usuario a autoridades de Spring Security
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getNombre())).collect(Collectors.toList());
     }
 
-    public Usuario registrar(Usuario u) { // Método para almacenar usuario con contraseña encriptada. save: Guarda una entidad determinada.
-        u.setPassword(passwordEncoder.encode(u.getPassword()));
-        return repositorio.save(u);
-    }
-//
-//    public Usuario findById(long id) { // Método para buscar usuario por su ID
-//        return repositorio.findById(id).orElse(null);
-//    }
-//
-    public Usuario buscarPorEmail(String email) { // Método para buscar a usuario por su Email.
-        return repositorio.findByEmail(email);
+    public Usuario registrar(Usuario u) { // Método para registrar un usuario con contraseña encriptada
+        u.setPassword(passwordEncoder.encode(u.getPassword())); // Encriptar la contraseña antes de guardarla
+        return repositorio.save(u); // Guardar el usuario en el repositorio
     }
 
-    @Transactional // Es un metadato que especifica que una interfaz, clase o método debe tener semántica transaccional.
-    public void deleteAll() { // deleteAll: Elimina todas las entidades gestionadas por el repositorio.
-        repositorio.deleteAllInBatch(); // deleteAllInBatch: Elimina todas las entidades en una llamada por lotes.
+    public Usuario buscarPorEmail(String email) { // Método para buscar un usuario por su email
+        return repositorio.findByEmail(email); // Buscar el usuario en el repositorio por su email
+    }
+
+    @Transactional // Indica que este método debe ejecutarse en una transacción
+    public void deleteAll() { // Método para eliminar todos los usuarios
+        repositorio.deleteAllInBatch(); // Eliminar todos los usuarios en una llamada por lotes
     }
 
 }
+

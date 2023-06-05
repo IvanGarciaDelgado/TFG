@@ -19,7 +19,12 @@ public class ProductosController {
 
     private final ProductoService productoService;
 
+    // Este constructor permite inyectar el servicio ProductoService al controlador.
+    public ProductosController(ProductoService productoService) {
+        this.productoService = productoService;
+    }
 
+    // Este método mapeado a la ruta "/catalogo" muestra el catálogo de productos.
     @GetMapping("")
     public String mostrarCatalogo(Model model) {
         List<Producto> productos = productoService.findAll();
@@ -27,6 +32,7 @@ public class ProductosController {
         return "catalogo";
     }
 
+    // Este método mapeado a la ruta "/catalogo/producto/{id}" muestra los detalles de un producto específico.
     @GetMapping("/producto/{id}")
     public String showProduct(Model model, @PathVariable Long id) {
         Producto result = productoService.findById(id);
@@ -37,13 +43,11 @@ public class ProductosController {
         return "redirect:/catalogo";
     }
 
+    // Este método mapeado a la ruta "/catalogo/list/filter" realiza un listado filtrado de productos por nombre.
     @GetMapping("/list/filter")
     public String listadoFiltrado(@RequestParam("nombre") String nombre, Model model) {
         List<Producto> listaProductos = productoService.buscador(nombre);
         model.addAttribute("productos", listaProductos);
         return "fragmentos::catalogo-productos";
     }
-
-
-
 }

@@ -58,9 +58,6 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<Compra> compra;
 
-/*    @OneToOne(mappedBy = "usuario", cascade = CascadeType.MERGE, orphanRemoval = true) // orphanRemoval = true, si un objeto relacionado es eliminado o desvinculado de la entidad padre, entonces ese objeto se eliminará de la base de datos automáticamente.
-    private Dieta dieta;*/
-
     public Usuario(String nombre, String apellidos, String movil, String email, String password, Collection<Role> roles) {
         this.nombre = nombre;
         this.apellidos = apellidos;

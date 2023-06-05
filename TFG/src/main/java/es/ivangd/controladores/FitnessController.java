@@ -10,16 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class FitnessController {
 
+    // Este método mapeado a la ruta "/" muestra la página de inicio (landing page).
     @GetMapping("/")
     public String landingPage() {
         return "index";
     }
 
+    // Este método mapeado a la ruta "/proveedores" muestra la página de proveedores.
     @GetMapping("/proveedores")
     public String proveedoresPage() {
         return "proveedores";
     }
-
-
-
 }

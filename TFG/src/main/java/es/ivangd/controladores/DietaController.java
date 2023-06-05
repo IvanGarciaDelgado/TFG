@@ -20,14 +20,18 @@ public class DietaController {
         this.dietaRepository = dietaRepository;
     }
 
+    // Este método mapeado a la ruta "/dieta" muestra la página de dieta.
+    // El parámetro "calorias" es opcional y se obtiene de los parámetros de la URL.
     @GetMapping("/dieta")
     public String mostrarPagina(@RequestParam(name = "calorias", required = false) Integer calorias, Model model) {
         if (calorias != null) {
+            // Si se proporciona el parámetro "calorias", se busca en el repositorio las dietas con esa cantidad de calorías.
             List<Dieta> dietas = dietaRepository.findByCalorias(calorias);
             model.addAttribute("dietas", dietas);
         }
         return "dieta";
     }
 }
+
 
 

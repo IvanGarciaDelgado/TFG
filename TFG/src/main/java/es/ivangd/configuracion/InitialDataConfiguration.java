@@ -54,19 +54,27 @@ public class InitialDataConfiguration implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
+        // Comprueba si el rol "ROLE_USER" ya existe en el repositorio de roles
         if (!roleRepository.existsByNombre("ROLE_USER")) {
-        Role roleUser = new Role();
-        roleUser.setNombre("ROLE_USER");
-        roleRepository.save(roleUser);
-    }
+            // Si no existe, crea un nuevo objeto Role y establece su nombre como "ROLE_USER"
+            Role roleUser = new Role();
+            roleUser.setNombre("ROLE_USER");
 
+            // Guarda el nuevo objeto Role en el repositorio de roles
+            roleRepository.save(roleUser);
+        }
+
+        // Comprueba si el rol "ROLE_ADMIN" ya existe en el repositorio de roles
         if (!roleRepository.existsByNombre("ROLE_ADMIN")) {
+            // Si no existe, crea un nuevo objeto Role y establece su nombre como "ROLE_ADMIN"
             Role roleAdmin = new Role();
             roleAdmin.setNombre("ROLE_ADMIN");
+
+            // Guarda el nuevo objeto Role en el repositorio de roles
             roleRepository.save(roleAdmin);
+        }
     }
 
-    }
 
 
     @Bean

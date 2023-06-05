@@ -39,6 +39,7 @@ class GestionUsuarioController {
         return ResponseEntity.ok(usuario);
     }
 
+    // Este método sirve para actualizar un usuario.
     @PutMapping("/usuarios/{id}")
     public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id, @RequestBody Usuario detallesUsuario) {
         Usuario usuario = repositorio.findById(id)
@@ -52,17 +53,15 @@ class GestionUsuarioController {
         return ResponseEntity.ok(usuarioActualizado);
     }
 
-    // Este método sirve para eliminar un usuario
+    // Este método sirve para eliminar un usuario.
     @DeleteMapping("/usuarios/{id}")
-    public ResponseEntity<Map<String,Boolean>> eliminarUsuario(@PathVariable Long id){
+    public ResponseEntity<Map<String, Boolean>> eliminarUsuario(@PathVariable Long id) {
         Usuario usuario = repositorio.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No existe el usuario con el ID : " + id));
 
         repositorio.delete(usuario);
         Map<String, Boolean> respuesta = new HashMap<>();
-        respuesta.put("eliminar",Boolean.TRUE);
+        respuesta.put("eliminar", Boolean.TRUE);
         return ResponseEntity.ok(respuesta);
     }
-
-
 }

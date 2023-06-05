@@ -13,4 +13,4 @@ public class ResourceNotFoundException extends RuntimeException {
     }
 }
 
-// Excepción personalizada por si no existe un empleado.
+// Excepción personalizada por si no existe un usuario.

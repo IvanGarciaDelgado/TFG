@@ -39,13 +39,14 @@ public class CarritoController {
 
     private final UsuarioService usuarioService;
 
-
+    // Este método anotado con @ModelAttribute devuelve una lista de productos en el carrito.
     @ModelAttribute("carrito")
     public List<Producto> productosCarrito() {
         List<Long> contenido = (List<Long>) httpSession.getAttribute("carrito");
         return (contenido == null) ? null : productoService.productosPorSuId(contenido);
     }
 
+    // Este método anotado con @ModelAttribute devuelve el total del carrito.
     @ModelAttribute("total_carrito")
     public Double totalCarrito() {
         List<Producto> productosCarrito = productosCarrito();
@@ -56,6 +57,7 @@ public class CarritoController {
         return 0.0;
     }
 
+    // Este método anotado con @ModelAttribute devuelve una lista de compras realizadas por el usuario actual.
     @ModelAttribute("mis_compras")
     public List<Compra> misCompras() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -63,12 +65,13 @@ public class CarritoController {
         return compraService.findByUsuario(usuario);
     }
 
-
+    // Este método mapeado a la ruta principal ("/carrito") muestra la vista del carrito.
     @GetMapping("")
     public String miCarrito(Model model) {
         return "carrito";
     }
 
+    // Este método mapeado a la ruta "/add/{id}" agrega un producto al carrito.
     @GetMapping("/add/{id}")
     public String addCarrito(Model model, @PathVariable Long id) {
         List<Long> contenido = (List<Long>) httpSession.getAttribute("carrito");
@@ -80,6 +83,7 @@ public class CarritoController {
         return "redirect:/carrito";
     }
 
+    // Este método mapeado a la ruta "/eliminar/{id}" elimina un producto del carrito.
     @GetMapping("/eliminar/{id}")
     public String borrarDeCarrito(Model model, @PathVariable Long id) {
         List<Long> contenido = (List<Long>) httpSession.getAttribute("carrito");
@@ -91,9 +95,9 @@ public class CarritoController {
         else
             httpSession.setAttribute("carrito", contenido);
         return "redirect:/carrito";
-
     }
 
+    // Este método mapeado a la ruta "/finalizar" realiza el checkout del carrito.
     @GetMapping("/finalizar")
     public String checkout() {
         List<Long> contenido = (List<Long>) httpSession.getAttribute("carrito");
@@ -108,16 +112,15 @@ public class CarritoController {
         httpSession.removeAttribute("carrito");
 
         return "redirect:/carrito/confirmar";
-
     }
 
-
+    // Este método mapeado a la ruta "/miscompras" muestra la vista de las compras realizadas por el usuario.
     @GetMapping("/miscompras")
     public String verMisCompras() {
         return "compras";
     }
 
-
+    // Este método mapeado a la ruta "/compra/factura/{id}" muestra la factura de una compra específica.
     @GetMapping("/compra/factura/{id}")
     public String factura(Model model, @PathVariable Long id) {
         Compra c = compraService.findById(id);
@@ -128,14 +131,15 @@ public class CarritoController {
         return "factura";
     }
 
+    // Este método mapeado a la ruta "/confirmar" muestra la vista de confirmación de compra.
     @GetMapping("/confirmar")
     public String confirmarCompra() {
         return "confirmar";
     }
 
+    // Este método mapeado a la ruta "/completado" muestra la vista de compra completada.
     @GetMapping("/completado")
     public String compraCompletada() {
         return "completado";
     }
-
 }
