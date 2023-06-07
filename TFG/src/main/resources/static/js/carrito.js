@@ -6,3 +6,4 @@ function actualizarPrecioTotal(input) {
     input.parentNode.nextElementSibling.querySelector('h5').textContent = precioTotal.toFixed(2);
 }
 
+

@@ -68,8 +68,11 @@ public class CarritoController {
     // Este método mapeado a la ruta principal ("/carrito") muestra la vista del carrito.
     @GetMapping("")
     public String miCarrito(Model model) {
+        List<Producto> carrito = productosCarrito(); // Recuperar el carrito de la sesión
+        model.addAttribute("carrito", carrito); // Establecer el carrito en el modelo
         return "carrito";
     }
+
 
     // Este método mapeado a la ruta "/add/{id}" agrega un producto al carrito.
     @GetMapping("/add/{id}")
@@ -108,10 +111,14 @@ public class CarritoController {
 
         Compra c = compraService.insertar(new Compra(), usuario);
 
-        productos.forEach(p -> compraService.addProductoCompra(p, c));
+        productos.forEach(p -> {
+            compraService.addProductoCompra(p, c);
+            compraService.agregarUsuarioProducto(usuario, p);
+        });
+
         httpSession.removeAttribute("carrito");
 
-        return "redirect:/carrito/confirmar";
+        return "redirect:/carrito/completado";
     }
 
     // Este método mapeado a la ruta "/miscompras" muestra la vista de las compras realizadas por el usuario.

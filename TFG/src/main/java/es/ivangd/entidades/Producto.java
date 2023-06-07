@@ -32,6 +32,7 @@ public class Producto {
 
     private int descuento;
 
+    @Column(columnDefinition="TEXT")
     private String detalles;
 
     private String imagen2;

@@ -31,15 +31,18 @@ export class ActualizarUsuarioComponent  implements OnInit{
     }, error => console.log(error));
   }
  */
-  irAlaListaDeEmpleados(){
+
+  irAlaListaDeUsuarios() {
+    // Navegar a la lista de usuarios
     this.router.navigate(['/usuarios']);
-    swal('Usuario actualizado',`El usuario ${this.usuario.nombre} ha sido actualizado con exito`,`success`);
+    // Mostrar una notificación de éxito
+    swal('Usuario actualizado', `El usuario ${this.usuario.nombre} ha sido actualizado con éxito`, 'success');
   }
 
   onSubmit() {
-    this.usuarioService.actualizarUsuario(this.id,this.usuario).subscribe(dato => {
-      this.irAlaListaDeEmpleados();
-    },error => console.log(error));
+    // Enviar los datos actualizados del usuario al servicio para su actualización
+    this.usuarioService.actualizarUsuario(this.id, this.usuario).subscribe(dato => {
+      this.irAlaListaDeUsuarios();
+    }, error => console.log(error));
   }
-
 }

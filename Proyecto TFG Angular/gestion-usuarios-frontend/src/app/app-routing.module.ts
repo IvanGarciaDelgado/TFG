@@ -6,11 +6,11 @@ import { ActualizarUsuarioComponent } from './actualizar-usuario/actualizar-usua
 import { UsuarioDetallesComponent } from './usuario-detalles/usuario-detalles.component';
 
 const routes: Routes = [
-  {path : 'usuarios', component:ListaUsuariosComponent},
-  {path: '', redirectTo:'usuarios',pathMatch:'full'},
-  {path: 'registrar-usuario', component:RegistrarUsuarioComponent},
-  {path: 'actualizar-usuario/:id', component:ActualizarUsuarioComponent},
-  {path: 'usuario-detalles/:id', component:UsuarioDetallesComponent}
+  { path: 'usuarios', component: ListaUsuariosComponent }, // Ruta para mostrar la lista de usuarios
+  { path: '', redirectTo: 'usuarios', pathMatch: 'full' }, // Ruta por defecto, redirige a la lista de usuarios
+  { path: 'registrar-usuario', component: RegistrarUsuarioComponent }, // Ruta para registrar un nuevo usuario
+  { path: 'actualizar-usuario/:id', component: ActualizarUsuarioComponent }, // Ruta para actualizar un usuario existente, requiere el ID del usuario
+  { path: 'usuario-detalles/:id', component: UsuarioDetallesComponent } // Ruta para mostrar los detalles de un usuario, requiere el ID del usuario
 ];
 
 @NgModule({

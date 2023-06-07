@@ -51,7 +51,7 @@ public class Usuario {
     private Collection<Role> roles;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "usuario_producto", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "producto_id"))
+    @JoinTable(name = "usuarios_producto", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "producto_id"))
     private List<Producto> productos;
 
     @JsonIgnore

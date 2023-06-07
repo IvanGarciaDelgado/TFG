@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
@@ -12,19 +11,19 @@ import { UsuarioDetallesComponent } from './usuario-detalles/usuario-detalles.co
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ListaUsuariosComponent,
-    RegistrarUsuarioComponent,
-    ActualizarUsuarioComponent,
-    UsuarioDetallesComponent
+    AppComponent, // Componente principal de la aplicación
+    ListaUsuariosComponent, // Componente para listar usuarios
+    RegistrarUsuarioComponent, // Componente para registrar usuarios
+    ActualizarUsuarioComponent, // Componente para actualizar usuarios
+    UsuarioDetallesComponent // Componente para mostrar los detalles de un usuario
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule
+    BrowserModule, // Módulo para el funcionamiento básico en un navegador web
+    AppRoutingModule, // Módulo de enrutamiento de la aplicación
+    HttpClientModule, // Módulo para realizar solicitudes HTTP
+    FormsModule // Módulo para el uso de formularios
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [], // Proveedores de servicios
+  bootstrap: [AppComponent] // Componente raíz de la aplicación
 })
 export class AppModule { }

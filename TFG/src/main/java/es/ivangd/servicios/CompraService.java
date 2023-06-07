@@ -3,7 +3,9 @@ package es.ivangd.servicios;
 import es.ivangd.entidades.Compra;
 import es.ivangd.entidades.Producto;
 import es.ivangd.entidades.Usuario;
+import es.ivangd.entidades.UsuarioProducto;
 import es.ivangd.repositorios.CompraRepository;
+import es.ivangd.repositorios.UsuarioProductoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,16 @@ public class CompraService {
     private final CompraRepository repositorio; // Repositorio para acceder y gestionar los datos de las compras
 
     private final ProductoService productoService; // Servicio para operaciones relacionadas con los productos
+
+    private final UsuarioProductoRepository usuarioProductoRepository;
+
+    public void agregarUsuarioProducto(Usuario usuario, Producto producto) {
+        UsuarioProducto usuarioProducto = new UsuarioProducto();
+        usuarioProducto.setUsuario(usuario);
+        usuarioProducto.setProducto(producto);
+        usuarioProductoRepository.save(usuarioProducto);
+    }
+
 
     public Compra insertar(Compra c, Usuario u) { // Método para insertar una compra asociada a un usuario
         c.setUsuario(u);

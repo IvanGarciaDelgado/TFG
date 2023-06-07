@@ -9,25 +9,26 @@ import swal from 'sweetalert2';
   templateUrl: './lista-usuarios.component.html',
   styleUrls: ['./lista-usuarios.component.css']
 })
-export class ListaUsuariosComponent implements OnInit{
+export class ListaUsuariosComponent implements OnInit {
 
-  usuarios:Usuario[];
+  usuarios: Usuario[];
 
-  constructor(private usuarioServicio:UsuarioService, private router:Router) { }
-
+  constructor(private usuarioServicio: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
     this.obtenerUsuarios();
   }
 
-  actualizarUsuario(id:number) {
+  // Redirecciona a la página de actualización de usuario
+  actualizarUsuario(id: number) {
     this.router.navigate(['actualizar-usuario', id]);
   }
 
-  eliminarUsuario(id:number) {
+  // Muestra un mensaje de confirmación y elimina un usuario
+  eliminarUsuario(id: number) {
     swal({
-      title: '¿Estas seguro?',
-      text: "Confirma si deseas eliminar al usuario",
+      title: '¿Estás seguro?',
+      text: 'Confirma si deseas eliminar al usuario',
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -38,28 +39,29 @@ export class ListaUsuariosComponent implements OnInit{
       cancelButtonClass: 'btn btn-danger',
       buttonsStyling: true
     }).then((result) => {
-      if(result.value){
+      if (result.value) {
         this.usuarioServicio.eliminarUsuario(id).subscribe(dato => {
           console.log(dato);
           this.obtenerUsuarios();
           swal(
             'Usuario eliminado',
-            'El usuario ha sido eliminado con exito',
+            'El usuario ha sido eliminado con éxito',
             'success'
-          )
-        })
+          );
+        });
       }
-    })
+    });
   }
 
-  verDetallesUsuario(id:number) {
+  // Redirecciona a la página de detalles de usuario
+  verDetallesUsuario(id: number) {
     this.router.navigate(['usuario-detalles', id]);
   }
 
+  // Obtiene la lista de usuarios desde el servicio
   private obtenerUsuarios() {
     this.usuarioServicio.obtenerListaDeUsuarios().subscribe(dato => {
       this.usuarios = dato;
     });
   }
-
 }

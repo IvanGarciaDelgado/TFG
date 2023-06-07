@@ -26,6 +26,7 @@ public class Dieta {
 
     private int calorias;
 
+    @Column(columnDefinition="TEXT")
     private String descripcion;
 
     @ElementCollection // Para mapear la lista de alimentos como una colección de elementos básicos.

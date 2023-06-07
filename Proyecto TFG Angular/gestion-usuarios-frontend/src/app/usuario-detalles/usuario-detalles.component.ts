@@ -17,10 +17,14 @@ export class UsuarioDetallesComponent implements OnInit{
   constructor(private route:ActivatedRoute, private usuarioServicio:UsuarioService) { }
 
   ngOnInit(): void {
+    // Obtener el ID del usuario de la ruta actual
     this.id = this.route.snapshot.params['id'];
+    // Crear una nueva instancia de Usuario
     this.usuario = new Usuario();
+    // Obtener los datos del usuario con el ID proporcionado
     this.usuarioServicio.obtenerUsuarioPorid(this.id).subscribe(dato => {
       this.usuario = dato;
+      // Mostrar una notificación con los detalles del usuario
       swal(`Detalles del usuario ${this.usuario.nombre}`);
     });
   }
